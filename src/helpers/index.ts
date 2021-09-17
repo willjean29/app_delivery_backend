@@ -1,3 +1,3 @@
 import DbValidators from "./dbValidators";
-
-export { DbValidators };
+import JwtGenerator from "./jwtGenerator";
+export { DbValidators, JwtGenerator };

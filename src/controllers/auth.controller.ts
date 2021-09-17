@@ -17,7 +17,9 @@ const signIn = async (req: Request, res: Response) => {
   }
   return res.json({
     success: true,
-    user: user,
+    user: user.user,
+    token: user.jwt,
+    refreshToken: user.jwtRefresh,
   });
 };
 
@@ -37,7 +39,9 @@ const signUp = async (req: Request, res: Response) => {
   }
   return res.json({
     success: true,
-    user: newUser,
+    user: newUser.newUser,
+    token: newUser.jwt,
+    refreshToken: newUser.jwtRefresh,
   });
 };
 
