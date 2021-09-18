@@ -1,11 +1,8 @@
 import { Router } from "express";
 import { UserController } from "../controllers";
+import { validationJwt } from "../middlewares";
 const router = Router();
 
-// router.get("/", (req, res) => {
-//   const e = new Error();
-//   e.
-//   res.send(new Error("sdasd"));
-// });
+router.get("/", validationJwt, UserController.getAllUsers);
 
 export default router;

@@ -1,3 +1,3 @@
 import validationSchema from "./validateSchema";
-
-export { validationSchema };
+import validationJwt from "./validateJwt";
+export { validationSchema, validationJwt };

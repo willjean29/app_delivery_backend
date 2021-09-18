@@ -45,7 +45,30 @@ const signUp = async (req: Request, res: Response) => {
   });
 };
 
+const refreshToken = async (req: Request, res: Response) => {
+  console.log(req.body);
+  const token = await AuthService.refreshToken(req.body.refreshToken);
+  if (token === undefined) {
+    return res.status(400).json({
+      success: false,
+      mag: "Token expirado",
+    });
+  }
+  if (!token) {
+    return res.status(500).json({
+      success: false,
+      mag: "Error al crear nuevo token",
+    });
+  }
+  return res.json({
+    success: true,
+    token: token.accessToken,
+    refreshToken: token.updateToken,
+  });
+};
+
 export default {
   signIn,
   signUp,
+  refreshToken,
 };
