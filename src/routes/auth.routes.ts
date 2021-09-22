@@ -2,19 +2,19 @@ import { Router } from "express";
 import { AuthController } from "../controllers";
 import { AuthSchemas } from "../schemas";
 import { validationSchema, validationJwt } from "../middlewares";
-const router = Router();
+const authRouter = Router();
 
-router.post(
+authRouter.post(
   "/signup",
   validationSchema(AuthSchemas.signUpSchema),
   AuthController.signUp
 );
 
-router.post(
+authRouter.post(
   "/signin",
   validationSchema(AuthSchemas.signInSchema),
   AuthController.signIn
 );
 
-router.post("/refresh-token", validationJwt, AuthController.refreshToken);
-export default router;
+authRouter.post("/refresh-token", validationJwt, AuthController.refreshToken);
+export default authRouter;

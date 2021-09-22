@@ -62,6 +62,7 @@ const refreshToken = async (req: Request, res: Response) => {
   }
   return res.json({
     success: true,
+    user: token.user,
     token: token.accessToken,
     refreshToken: token.updateToken,
   });

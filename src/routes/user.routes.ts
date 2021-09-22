@@ -1,8 +1,10 @@
 import { Router } from "express";
 import { UserController } from "../controllers";
 import { validationJwt } from "../middlewares";
-const router = Router();
+const userRouter = Router();
 
-router.get("/", validationJwt, UserController.getAllUsers);
+userRouter.get("/", validationJwt, UserController.getAllUsers);
 
-export default router;
+// router.post("/role", );
+
+export default userRouter;

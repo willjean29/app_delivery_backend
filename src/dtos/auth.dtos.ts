@@ -1,4 +1,4 @@
-export interface SignUpDTO {
+export interface SignUpDto {
   email: string;
   password: string;
   confirmPassword?: string;
@@ -8,7 +8,7 @@ export interface SignUpDTO {
   lastName: string;
 }
 
-export interface SignInDTO {
+export interface SignInDto {
   email: string;
   password: string;
 }

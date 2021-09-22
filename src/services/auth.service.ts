@@ -1,10 +1,11 @@
 import jwt from "jsonwebtoken";
 import User, { IUser } from "../models/user.model";
+import Role, { IRole } from "../models/role.model";
 import Token, { IToken } from "../models/token.model";
 import { DbValidators, JwtGenerator } from "../helpers";
-import { SignUpDTO, SignInDTO } from "../dtos/auth.dtos";
+import { SignUpDto, SignInDto } from "../dtos/auth.dtos";
 import { JwtPayload } from "../middlewares/validateJwt";
-const signUp = async (signUpDTO: SignUpDTO) => {
+const signUp = async (signUpDTO: SignUpDto) => {
   try {
     const existEmail = await DbValidators.existEmail(signUpDTO.email);
     if (existEmail) return undefined;
@@ -36,7 +37,7 @@ const signUp = async (signUpDTO: SignUpDTO) => {
   }
 };
 
-const signIn = async (signIn: SignInDTO) => {
+const signIn = async (signIn: SignInDto) => {
   try {
     const existEmail = await DbValidators.existEmail(signIn.email);
     if (!existEmail) return undefined;
@@ -83,6 +84,8 @@ const refreshToken = async (jwtRefresh: string) => {
       token.refreshToken as string,
       process.env.SECRET_JWT_REFRESH!
     ) as JwtPayload;
+    // get userById from payload
+    const user = (await User.findById(payload)) as IUser;
     // create new access and refresh token
     accessToken = (await JwtGenerator.generateJwt(
       payload,
@@ -97,6 +100,7 @@ const refreshToken = async (jwtRefresh: string) => {
     token.refreshToken = updateToken;
     token.save();
     return {
+      user,
       accessToken,
       updateToken,
     };

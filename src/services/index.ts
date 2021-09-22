@@ -1,3 +1,3 @@
 import AuthService from "./auth.service";
-
-export { AuthService };
+import RoleService from "./role.service";
+export { AuthService, RoleService };

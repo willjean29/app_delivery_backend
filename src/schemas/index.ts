@@ -1,3 +1,3 @@
 import AuthSchemas from "./auth.schemas";
-
-export { AuthSchemas };
+import RoleSchemas from "./role.schemas";
+export { AuthSchemas, RoleSchemas };

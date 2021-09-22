@@ -1,3 +1,4 @@
 import UserController from "./user.controller";
 import AuthController from "./auth.controller";
-export { UserController, AuthController };
+import RoleController from "./role.controller";
+export { UserController, AuthController, RoleController };

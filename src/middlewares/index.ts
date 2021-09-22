@@ -1,3 +1,4 @@
 import validationSchema from "./validateSchema";
 import validationJwt from "./validateJwt";
-export { validationSchema, validationJwt };
+import validationRole from "./validateRole";
+export { validationSchema, validationJwt, validationRole };

@@ -5,7 +5,7 @@ export interface IToken extends Document {
 }
 const TokenSchema = new Schema({
   refreshToken: {
-    type: "string",
+    type: String,
     required: true,
   },
 });
