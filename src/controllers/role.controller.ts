@@ -20,6 +20,21 @@ const createRole = async (req: Request, res: Response) => {
   });
 };
 
+const getAllRoles = async (req: Request, res: Response) => {
+  const roles = await RoleService.getAllRoles();
+  if (!roles) {
+    return res.status(500).json({
+      success: false,
+      msg: "Erro al obtener roles",
+    });
+  }
+  return res.json({
+    success: true,
+    roles,
+  });
+};
+
 export default {
   createRole,
+  getAllRoles,
 };

@@ -11,6 +11,6 @@ roleRouter.post(
   RoleController.createRole
 );
 
-// router.post("/role", );
+roleRouter.get("/", RoleController.getAllRoles);
 
 export default roleRouter;

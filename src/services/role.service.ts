@@ -1,6 +1,7 @@
 import { RoleDto } from "../dtos/role.dtos";
 import Role, { IRole } from "../models/role.model";
 import { DbValidators } from "../helpers";
+
 const createRole = async (roleDto: RoleDto) => {
   const existRole = await DbValidators.existRole(roleDto.name);
   if (existRole) return undefined;
@@ -14,6 +15,17 @@ const createRole = async (roleDto: RoleDto) => {
   }
 };
 
+const getAllRoles = async () => {
+  try {
+    const roles = (await Role.find()) as IRole[];
+    return roles;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
 export default {
   createRole,
+  getAllRoles,
 };
