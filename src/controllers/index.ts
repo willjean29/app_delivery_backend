@@ -1,4 +1,5 @@
 import UserController from "./user.controller";
 import AuthController from "./auth.controller";
 import RoleController from "./role.controller";
-export { UserController, AuthController, RoleController };
+import CategorieController from "./categorie.controller";
+export { UserController, AuthController, RoleController, CategorieController };

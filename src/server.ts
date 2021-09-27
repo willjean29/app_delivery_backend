@@ -1,6 +1,6 @@
 import express from "express";
 import Connection from "./database/config";
-import { UserRoutes, AuthRoutes, RoleRoutes } from "./routes";
+import { UserRoutes, AuthRoutes, RoleRoutes, CategorieRoutes } from "./routes";
 
 class Server {
   private app;
@@ -14,6 +14,7 @@ class Server {
       auth: "/api/auth",
       users: "/api/users",
       roles: "/api/roles",
+      categories: "/api/categories",
     };
 
     // Database connected
@@ -35,6 +36,7 @@ class Server {
     this.app.use(this.paths.users, UserRoutes);
     this.app.use(this.paths.auth, AuthRoutes);
     this.app.use(this.paths.roles, RoleRoutes);
+    this.app.use(this.paths.categories, CategorieRoutes);
   }
 
   listen() {
