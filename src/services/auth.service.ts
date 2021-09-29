@@ -71,6 +71,22 @@ const signIn = async (signIn: SignInDto) => {
   }
 };
 
+const signOut = async (jwt: string) => {
+  try {
+    const token = (await Token.findOneAndDelete({
+      refreshToken: jwt,
+    })) as IToken;
+    if (!token) {
+      return undefined;
+    } else {
+      return token;
+    }
+  } catch (error) {
+    console.log({ error });
+    return null;
+  }
+};
+
 const refreshToken = async (jwtRefresh: string) => {
   if (!refreshToken) return undefined;
   let accessToken: string = "";
@@ -110,7 +126,8 @@ const refreshToken = async (jwtRefresh: string) => {
   }
 };
 
-const getCurrentUser = async (id: string) => {
+const getCurrentUser = async (id: string, jwt: string) => {
+  console.log({ jwt });
   try {
     const accessToken = (await JwtGenerator.generateJwt(
       id,
@@ -122,8 +139,12 @@ const getCurrentUser = async (id: string) => {
       process.env.SECRET_JWT_REFRESH!,
       process.env.EXPIRES_JWT_REFRESH!
     )) as string;
-    const token = new Token({ refreshToken: tokenRefresh });
-    token.save();
+    const token = (await Token.findOneAndUpdate(
+      { refreshToken: jwt },
+      { refreshToken: tokenRefresh },
+      { new: true, runValidators: true }
+    )) as IToken;
+    console.log({ tokenRefresh });
     return { accessToken, tokenRefresh };
   } catch (error) {
     console.log({ error });
@@ -134,6 +155,7 @@ const getCurrentUser = async (id: string) => {
 export default {
   signUp,
   signIn,
+  signOut,
   refreshToken,
   getCurrentUser,
 };

@@ -45,6 +45,27 @@ const signUp = async (req: Request, res: Response) => {
   });
 };
 
+const signOut = async (req: Request, res: Response) => {
+  const { refreshtoken } = req.headers;
+  const token = await AuthService.signOut(refreshtoken as string);
+  if (token === undefined) {
+    return res.status(400).json({
+      success: false,
+      msg: "Token invalido",
+    });
+  }
+  if (!token) {
+    return res.status(500).json({
+      success: false,
+      mag: "Error Server - Error al elimianr token",
+    });
+  }
+  return res.json({
+    success: true,
+    refreshToken: token,
+  });
+};
+
 const refreshToken = async (req: Request, res: Response) => {
   console.log(req.body);
   const token = await AuthService.refreshToken(req.body.refreshToken);
@@ -69,8 +90,14 @@ const refreshToken = async (req: Request, res: Response) => {
 };
 
 const getCurrentUser = async (req: Request, res: Response) => {
+  const { refreshtoken } = req.headers;
+  // console.log({ headers: req.headers });
   // @ts-ignore
-  const user = await AuthService.getCurrentUser(req.user._id);
+  const user = await AuthService.getCurrentUser(
+    // @ts-ignore
+    req.user._id,
+    refreshtoken as string
+  );
   if (!user) {
     return res.status(500).json({
       success: false,
@@ -89,6 +116,7 @@ const getCurrentUser = async (req: Request, res: Response) => {
 export default {
   signIn,
   signUp,
+  signOut,
   refreshToken,
   getCurrentUser,
 };
