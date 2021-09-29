@@ -110,8 +110,30 @@ const refreshToken = async (jwtRefresh: string) => {
   }
 };
 
+const getCurrentUser = async (id: string) => {
+  try {
+    const accessToken = (await JwtGenerator.generateJwt(
+      id,
+      process.env.SECRET_JWT!,
+      process.env.EXPIRES_JWT!
+    )) as string;
+    const tokenRefresh = (await JwtGenerator.generateJwt(
+      id,
+      process.env.SECRET_JWT_REFRESH!,
+      process.env.EXPIRES_JWT_REFRESH!
+    )) as string;
+    const token = new Token({ refreshToken: tokenRefresh });
+    token.save();
+    return { accessToken, tokenRefresh };
+  } catch (error) {
+    console.log({ error });
+    return null;
+  }
+};
+
 export default {
   signUp,
   signIn,
   refreshToken,
+  getCurrentUser,
 };

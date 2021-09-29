@@ -27,21 +27,17 @@ const validationJwt = async (
       accessToken as string,
       process.env.SECRET_JWT!
     ) as JwtPayload;
-
-    // for a valid access token
-    if (moment(payload.exp * 1000).isBefore()) {
-      // exist user
-      const user = (await User.findById(payload.payload)) as IUser;
-      if (!user)
-        return res.status(400).json({
-          success: false,
-          msg: "Access-Token invalido - usuario no registrado",
-        });
-      // validate status
-      // @ts-ignore
-      req.user = user;
-      return next();
-    }
+    // exist user
+    const user = (await User.findById(payload.payload)) as IUser;
+    if (!user)
+      return res.status(400).json({
+        success: false,
+        msg: "Access-Token invalido - usuario no registrado",
+      });
+    // validate status
+    // @ts-ignore
+    req.user = user;
+    return next();
   } catch (error: any) {
     const name = error.name;
     // for a invalid access token or expired token

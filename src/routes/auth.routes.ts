@@ -4,6 +4,8 @@ import { AuthSchemas } from "../schemas";
 import { validationSchema, validationJwt } from "../middlewares";
 const authRouter = Router();
 
+authRouter.post("/", validationJwt, AuthController.getCurrentUser);
+
 authRouter.post(
   "/signup",
   validationSchema(AuthSchemas.signUpSchema),

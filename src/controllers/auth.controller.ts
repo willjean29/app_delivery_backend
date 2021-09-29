@@ -12,7 +12,7 @@ const signIn = async (req: Request, res: Response) => {
   if (!user) {
     return res.status(500).json({
       success: false,
-      msg: "Error al iniciar sesion",
+      msg: "Error Server - Error al iniciar sesion",
     });
   }
   return res.json({
@@ -34,7 +34,7 @@ const signUp = async (req: Request, res: Response) => {
   if (!newUser) {
     return res.status(500).json({
       success: false,
-      msg: "Error al registrar usuario",
+      msg: "Error Server - Error al registrar usuario",
     });
   }
   return res.json({
@@ -57,7 +57,7 @@ const refreshToken = async (req: Request, res: Response) => {
   if (!token) {
     return res.status(500).json({
       success: false,
-      mag: "Error al crear nuevo token",
+      mag: "Error Server - Error al crear nuevo token",
     });
   }
   return res.json({
@@ -68,8 +68,27 @@ const refreshToken = async (req: Request, res: Response) => {
   });
 };
 
+const getCurrentUser = async (req: Request, res: Response) => {
+  // @ts-ignore
+  const user = await AuthService.getCurrentUser(req.user._id);
+  if (!user) {
+    return res.status(500).json({
+      success: false,
+      msg: "Error Server - Error al obtener usuario",
+    });
+  }
+  return res.json({
+    success: true,
+    // @ts-ignore
+    user: req.user,
+    token: user.accessToken,
+    refreshToken: user.tokenRefresh,
+  });
+};
+
 export default {
   signIn,
   signUp,
   refreshToken,
+  getCurrentUser,
 };
