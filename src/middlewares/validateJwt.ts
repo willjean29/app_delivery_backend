@@ -27,6 +27,7 @@ const validationJwt = async (
       accessToken as string,
       process.env.SECRET_JWT!
     ) as JwtPayload;
+    console.log({ payload });
     // exist user
     const user = (await User.findById(payload.payload)) as IUser;
     if (!user)

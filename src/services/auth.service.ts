@@ -127,7 +127,6 @@ const refreshToken = async (jwtRefresh: string) => {
 };
 
 const getCurrentUser = async (id: string, jwt: string) => {
-  console.log({ jwt });
   try {
     const accessToken = (await JwtGenerator.generateJwt(
       id,
@@ -144,7 +143,7 @@ const getCurrentUser = async (id: string, jwt: string) => {
       { refreshToken: tokenRefresh },
       { new: true, runValidators: true }
     )) as IToken;
-    console.log({ tokenRefresh });
+
     return { accessToken, tokenRefresh };
   } catch (error) {
     console.log({ error });

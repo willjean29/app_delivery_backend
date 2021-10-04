@@ -16,4 +16,4 @@ const LocationSchema = new Schema({
   },
 });
 
-export default model<ILocation>("Location", LocationSchema);
+export default LocationSchema;

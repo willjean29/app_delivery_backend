@@ -3,11 +3,14 @@ import LocationSchema, { ILocation } from "./location.model";
 
 export interface IBusiness extends Document {
   name: string;
+  user: string;
   categorie: string;
   description: string;
   location: ILocation;
+  address: string;
   background: string;
   img: string;
+  phone: string;
   rating: number;
 }
 
@@ -18,10 +21,16 @@ const BusinessSchema = new Schema({
     unique: true,
     trim: true,
   },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+    uniqued: true,
+  },
   categorie: {
     type: Schema.Types.ObjectId,
     ref: "Categorie",
-    required: [true, "La categoria es obligatoria"],
+    required: true,
   },
   description: {
     type: String,
@@ -29,12 +38,14 @@ const BusinessSchema = new Schema({
   },
   location: {
     type: LocationSchema,
-    required: [true, "La ubicación es obligatoria"],
+    required: true,
+    unique: true,
   },
-  direcction: {
+  address: {
     type: String,
     trim: true,
-    required: [true, "La dirección es obligatoria"],
+    required: true,
+    unique: true,
   },
   background: {
     type: String,
@@ -47,7 +58,8 @@ const BusinessSchema = new Schema({
   phone: {
     type: String,
     trim: true,
-    required: [true, "El teléfono es obligatoria"],
+    required: true,
+    unique: true,
   },
   rating: {
     type: Number,

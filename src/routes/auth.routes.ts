@@ -20,5 +20,5 @@ authRouter.post(
 
 authRouter.post("/signout", AuthController.signOut);
 
-authRouter.post("/refresh-token", validationJwt, AuthController.refreshToken);
+authRouter.post("/refresh-token", AuthController.refreshToken);
 export default authRouter;
