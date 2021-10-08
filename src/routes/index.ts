@@ -4,6 +4,7 @@ import RoleRoutes from "./role.routes";
 import CategorieRoutes from "./categorie.routes";
 import SubcategorieRoutes from "./subcategorie.routes";
 import BusinessRoutes from "./business.routes";
+import ProductRoutes from "./product.routes";
 export {
   UserRoutes,
   AuthRoutes,
@@ -11,4 +12,5 @@ export {
   CategorieRoutes,
   BusinessRoutes,
   SubcategorieRoutes,
+  ProductRoutes,
 };

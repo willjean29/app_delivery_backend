@@ -1,5 +1,14 @@
 import { Schema, model, Document } from "mongoose";
 
+export interface IProduct extends Document {
+  name: string;
+  description: string;
+  img: string;
+  price: number;
+  categorie: string;
+  business: string;
+}
+
 const ProductSchema = new Schema({
   name: {
     type: String,
@@ -20,6 +29,7 @@ const ProductSchema = new Schema({
   },
   price: {
     type: Number,
+    required: true,
   },
   categorie: {
     type: Schema.Types.ObjectId,

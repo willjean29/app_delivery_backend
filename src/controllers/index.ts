@@ -4,6 +4,7 @@ import RoleController from "./role.controller";
 import CategorieController from "./categorie.controller";
 import SubcategorieController from "./subcategorie.controller";
 import BusinessController from "./business.controller";
+import ProductsController from "./product.controller";
 export {
   UserController,
   AuthController,
@@ -11,4 +12,5 @@ export {
   CategorieController,
   BusinessController,
   SubcategorieController,
+  ProductsController,
 };
