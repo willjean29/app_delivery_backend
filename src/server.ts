@@ -6,6 +6,7 @@ import {
   RoleRoutes,
   CategorieRoutes,
   BusinessRoutes,
+  SubcategorieRoutes,
 } from "./routes";
 
 class Server {
@@ -22,6 +23,7 @@ class Server {
       roles: "/api/roles",
       categories: "/api/categories",
       business: "/api/business",
+      subcategories: "/api/subcategories",
     };
 
     // Database connected
@@ -45,6 +47,7 @@ class Server {
     this.app.use(this.paths.roles, RoleRoutes);
     this.app.use(this.paths.categories, CategorieRoutes);
     this.app.use(this.paths.business, BusinessRoutes);
+    this.app.use(this.paths.subcategories, SubcategorieRoutes);
   }
 
   listen() {
